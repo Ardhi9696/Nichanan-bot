@@ -14,6 +14,15 @@ from utils.topic_guard import handle_thread_guard
 
 logger = logging.getLogger(__name__)
 CACHE_FILE = EPS_DATA
+_admin_ids_env = os.getenv("ADMIN_LIST", "") or ""
+_owner_id = os.getenv("MY_TELEGRAM_ID", "")
+_admin_ids = {
+    int(part.strip())
+    for part in (_admin_ids_env.split(",") if _admin_ids_env else [])
+    if part.strip().isdigit()
+}
+if _owner_id.strip().isdigit():
+    _admin_ids.add(int(_owner_id.strip()))
 
 
 # ------- cache utils -------
@@ -127,6 +136,19 @@ async def cek_ujian(update: Update, context: ContextTypes.DEFAULT_TYPE):
     logger.info(
         f"[CHECK] /cek invoked in chat={update.effective_chat.id} thread={getattr(update.effective_message,'message_thread_id',None)} by uid={update.effective_user.id}"
     )
+    user = update.effective_user
+    chat_type = update.effective_chat.type
+    is_admin = user.id in _admin_ids
+
+    # Hanya grup; DM hanya admin
+    if chat_type == "private" and not is_admin:
+        await update.message.reply_text(
+            "❌ /cek hanya bisa dipakai di grup. DM hanya untuk admin."
+        )
+        return
+    if chat_type not in ["group", "supergroup"] and not is_admin:
+        await update.message.reply_text("❌ /cek hanya bisa dipakai di grup.")
+        return
 
     if not await handle_thread_guard("cek", update, context):
         return
