@@ -3,7 +3,6 @@ import os
 from telegram.ext import Application, CommandHandler, MessageHandler, filters
 
 from handlers.command_wrapper import with_cooldown
-from handlers.responder import simple_responder
 from handlers.cek_id import cek_id
 from handlers.help import help_command
 
@@ -21,12 +20,4 @@ def register_handlers(app: Application):
     app.add_handler(CommandHandler(["eps", "e"], eps_command))
     app.add_handler(CommandHandler("tanya", with_cooldown(tanya_meta)))
 
-    # Responder dasar (opsional)
-    app.add_handler(
-        MessageHandler(
-            filters.TEXT
-            & ~filters.COMMAND
-            & (filters.REPLY | filters.Entity("mention")),
-            simple_responder,
-        )
-    )
+    # Responder di-nonaktifkan (biar handled oleh bot lain)
