@@ -130,7 +130,7 @@ def main():
 
     application.job_queue.run_once(_warmup_browser, when=1)
 
-    logger.info("✅ Minsu_Bot aktif dan siap digunakan.")
+    logger.info("✅ Nichanan_Bot aktif dan siap digunakan.")
     application.run_polling()
 
 

@@ -5,7 +5,7 @@ from telegram.ext import ContextTypes
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         """
-📖 *Bantuan Singkat Minsu Bot*  
+📖 *Bantuan Singkat Nichanan Bot*  
 Perintah yang tersedia saat ini:
 
 🔎 *Cek Hasil CBT EPS-TOPIK*  
