@@ -85,6 +85,22 @@ logger.info(f"✅ Total akun EPS terdaftar: {len(EPS_ACCOUNTS)}")
 logger.info(f"✅ Total ID Telegram diizinkan: {len(ALLOWED_IDS)}")
 
 
+def _mask_username(u: str) -> str:
+    if not u:
+        return "-"
+    if len(u) <= 4:
+        return u[0] + "***" if len(u) > 1 else "***"
+    return u[:2] + "***" + u[-2:]
+
+
+def _mask_birthday(b: str) -> str:
+    if not b:
+        return "-"
+    b = b.replace("/", "-")
+    # Ambil 4 digit tahun, sisanya ditutup
+    return (b[:4] if len(b) >= 4 else "**") + "-**-**"
+
+
 # ====== UTIL TELEGRAM ======
 async def _ensure_authorized_dm(
     update: Update, context: ContextTypes.DEFAULT_TYPE
@@ -198,7 +214,9 @@ async def eps_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         birthday = normalize_birthday(birthday_raw)
         account_key = (username or "").lower().strip()
 
-        logger.info(f"[{uid}] Mode: MANUAL | user={username} | bday={birthday}")
+        logger.info(
+            f"[{uid}] Mode: MANUAL | user={_mask_username(username)} | bday={_mask_birthday(birthday)}"
+        )
 
         try:
             # Gunakan async session manager
@@ -215,19 +233,7 @@ async def eps_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
             logger.info(f"[{uid}] ✅ Data progres berhasil diambil (session OK).")
 
-            # simpan cache manual
-            cache = _load_cache(CACHE_MANUAL_FILE)
-            entry = {
-                "telegram_id": uid,
-                "checked_at": _now_jakarta_iso(),
-                "aktif_ref_id": data.get("aktif_ref_id"),
-                "data": data,
-                "mode": "manual",
-                "username_used": username,
-            }
-            _append_snapshot_for_account(cache, uid, account_key, entry)
-            _save_cache(CACHE_MANUAL_FILE, cache)
-            logger.info(f"[{uid}] 💾 Cache manual disimpan.")
+            # Jangan simpan data manual ke disk untuk mengurangi PII yang tersimpan
 
             # HAPUS PESAN "MOHON TUNGGU" DAN PESAN COMMAND
             await _delete_wait_message()
