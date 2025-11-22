@@ -20,8 +20,6 @@ Contoh: `/cek 012202512345678`
 Contoh: `/tanya Siapa presiden Korea?`
 
 🆔 *Info Chat*  
-/cek_id – Tampilkan ID chat & thread tempat perintah dipanggil.
-
 ℹ️ *Info*  
 /help – Tampilkan bantuan ini  
 Reply/mention bot – Bot akan membalas dengan respon ringan sesuai konteks.

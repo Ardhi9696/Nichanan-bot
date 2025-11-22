@@ -5,7 +5,6 @@ Bot Telegram ringan untuk komunitas EPS-TOPIK Indonesia. Fitur yang dipertahanka
 - 🔎 `/cek <nomor ujian>` — cek hasil CBT EPS-TOPIK dengan guard topik.
 - 📊 `/eps` — pantau progress EPS di DM (perlu whitelist di `.env` atau `config/eps_accounts.json`).
 - 🤖 `/tanya <pertanyaan>` — tanya Meta AI.
-- 🆔 `/cek_id` — lihat ID chat & thread untuk konfigurasi.
 - 💬 Balas/mention bot — bot memberi respon ringan dari `data/respon.json`.
 
 ## Persiapan Cepat
