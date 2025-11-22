@@ -19,7 +19,6 @@ Contoh: `/cek 012202512345678`
 /tanya [pertanyaan] – Ajukan pertanyaan ke Meta AI  
 Contoh: `/tanya Siapa presiden Korea?`
 
-🆔 *Info Chat*  
 ℹ️ *Info*  
 /help – Tampilkan bantuan ini  
 Reply/mention bot – Bot akan membalas dengan respon ringan sesuai konteks.
