@@ -23,6 +23,13 @@ _admin_ids = {
 }
 if _owner_id.strip().isdigit():
     _admin_ids.add(int(_owner_id.strip()))
+_main_group_id_raw = os.getenv("MAIN_GROUP_ID", "") or ""
+_main_group_id = None
+try:
+    if _main_group_id_raw:
+        _main_group_id = int(_main_group_id_raw)
+except Exception:
+    _main_group_id = None
 
 
 # ------- cache utils -------
@@ -140,12 +147,29 @@ async def cek_ujian(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_type = update.effective_chat.type
     is_admin = user.id in _admin_ids
 
-    # Hanya grup; DM hanya admin
+    # Izinkan DM hanya jika admin atau sudah bergabung ke grup utama (MAIN_GROUP_ID)
     if chat_type == "private" and not is_admin:
-        await update.message.reply_text(
-            "❌ /cek hanya bisa dipakai di grup. DM hanya untuk admin."
-        )
-        return
+        if _main_group_id is None:
+            await update.message.reply_text(
+                "❌ /cek hanya bisa dipakai di grup. (MAIN_GROUP_ID belum dikonfigurasi)"
+            )
+            return
+        try:
+            member = await context.bot.get_chat_member(
+                chat_id=_main_group_id, user_id=user.id
+            )
+            if member.status not in ["member", "creator", "administrator"]:
+                await update.message.reply_text(
+                    "❌ /cek via DM hanya untuk member grup. Silakan bergabung ke grup dulu."
+                )
+                return
+        except Exception as e:
+            logger.warning(f"Gagal cek membership grup utama: {e}")
+            await update.message.reply_text(
+                "❌ /cek via DM hanya untuk member grup. Coba lagi setelah bergabung."
+            )
+            return
+
     if chat_type not in ["group", "supergroup"] and not is_admin:
         await update.message.reply_text("❌ /cek hanya bisa dipakai di grup.")
         return
