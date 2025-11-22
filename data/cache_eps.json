@@ -598,5 +598,65 @@
     "lulus_min": "97.5",
     "status": "",
     "masa": "~"
+  },
+  "0122025C50910001": {
+    "nama": "KURNIAWAN DENI",
+    "negara": "INDONESIA",
+    "bidang": "Manufacturing",
+    "tanggal": "20251017",
+    "mendengar": "85",
+    "bacaan": "80",
+    "total": "165",
+    "lulus_min": "90",
+    "status": "Y",
+    "masa": "20251020~20271019"
+  },
+  "0092024C51048001": {
+    "nama": "CHIT KO KO",
+    "negara": "MYANMAR",
+    "bidang": "Manufacturing",
+    "tanggal": "20250407",
+    "mendengar": "47.5",
+    "bacaan": "47.5",
+    "total": "95",
+    "lulus_min": "95",
+    "status": "",
+    "masa": "~"
+  },
+  "0092024C51041616": {
+    "nama": "KHUN NAY OO HLAING",
+    "negara": "MYANMAR",
+    "bidang": "Manufacturing",
+    "tanggal": "20240927",
+    "mendengar": "50",
+    "bacaan": "47.5",
+    "total": "97.5",
+    "lulus_min": "97.5",
+    "status": "",
+    "masa": "~"
+  },
+  "0062025C50900001": {
+    "nama": "NEUPANE BINOD",
+    "negara": "NEPAL",
+    "bidang": "Manufacturing",
+    "tanggal": "20250924",
+    "mendengar": "100",
+    "bacaan": "95",
+    "total": "195",
+    "lulus_min": "90",
+    "status": "Y",
+    "masa": "20251112~20271111"
+  },
+  "0062024C50158235": {
+    "nama": "LIMBU RAM KUMAR",
+    "negara": "NEPAL",
+    "bidang": "Manufacturing",
+    "tanggal": "20241117",
+    "mendengar": "50",
+    "bacaan": "50",
+    "total": "100",
+    "lulus_min": "97.5",
+    "status": "",
+    "masa": "~"
   }
 }

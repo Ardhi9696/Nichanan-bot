@@ -1,6 +1,5 @@
 # requirements.txt
 python-telegram-bot==20.7
-requests
 beautifulsoup4
 python-dotenv
 playwright
@@ -8,3 +7,4 @@ python-dateutil
 colorlog
 meta-ai-api
 python-telegram-bot[job-queue]
+selenium
