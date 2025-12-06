@@ -18,6 +18,7 @@ __pycache__/
 data/eps_cache_auto.json
 data/eps_cache_manual.json
 chrome_profiles/
+venv
 
 #config
 config/eps_accounts.json
